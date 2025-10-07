@@ -23,7 +23,6 @@ pub trait Word:
     + From<u16>
     + From<u32>
     + From<u64>
-    + From<usize>
 {
 }
 
@@ -49,7 +48,6 @@ impl<T> Word for T where
         + From<u16>
         + From<u32>
         + From<u64>
-        + From<usize>
 {
 }
 
