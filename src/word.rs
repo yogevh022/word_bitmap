@@ -7,7 +7,9 @@ pub trait Word:
     + Debug
     + Display
     + Binary
-    + BitScan
+    + WordOps
+    + Eq
+    + PartialEq
     + BitOr<Output = Self>
     + BitOrAssign
     + BitAnd<Output = Self>
@@ -18,6 +20,10 @@ pub trait Word:
     + Shl<usize, Output = Self>
     + Shr<usize, Output = Self>
     + From<u8>
+    + From<u16>
+    + From<u32>
+    + From<u64>
+    + From<usize>
 {
 }
 
@@ -27,7 +33,9 @@ impl<T> Word for T where
         + Debug
         + Display
         + Binary
-        + BitScan
+        + WordOps
+        + Eq
+        + PartialEq
         + BitOr<Output = Self>
         + BitOrAssign
         + BitAnd<Output = Self>
@@ -38,17 +46,27 @@ impl<T> Word for T where
         + Shl<usize, Output = Self>
         + Shr<usize, Output = Self>
         + From<u8>
+        + From<u16>
+        + From<u32>
+        + From<u64>
+        + From<usize>
 {
 }
 
-pub trait BitScan {
+pub trait WordOps {
+    const MAX: Self;
+    const MIN: Self;
+    const ONE: Self;
     fn trailing_zeros(self) -> u32;
     fn leading_zeros(self) -> u32;
     fn trailing_ones(self) -> u32;
     fn leading_ones(self) -> u32;
 }
 
-impl BitScan for u8 {
+impl WordOps for u8 {
+    const MAX: Self = u8::MAX;
+    const MIN: Self = u8::MIN;
+    const ONE: Self = 1;
     #[inline(always)]
     fn trailing_zeros(self) -> u32 {
         self.trailing_zeros()
@@ -70,7 +88,10 @@ impl BitScan for u8 {
     }
 }
 
-impl BitScan for u16 {
+impl WordOps for u16 {
+    const MAX: Self = u16::MAX;
+    const MIN: Self = u16::MIN;
+    const ONE: Self = 1;
     #[inline(always)]
     fn trailing_zeros(self) -> u32 {
         self.trailing_zeros()
@@ -92,7 +113,10 @@ impl BitScan for u16 {
     }
 }
 
-impl BitScan for u32 {
+impl WordOps for u32 {
+    const MAX: Self = u32::MAX;
+    const MIN: Self = u32::MIN;
+    const ONE: Self = 1;
     #[inline(always)]
     fn trailing_zeros(self) -> u32 {
         self.trailing_zeros()
@@ -114,7 +138,10 @@ impl BitScan for u32 {
     }
 }
 
-impl BitScan for u64 {
+impl WordOps for u64 {
+    const MAX: Self = u64::MAX;
+    const MIN: Self = u64::MIN;
+    const ONE: Self = 1;
     #[inline(always)]
     fn trailing_zeros(self) -> u32 {
         self.trailing_zeros()
@@ -136,7 +163,10 @@ impl BitScan for u64 {
     }
 }
 
-impl BitScan for u128 {
+impl WordOps for u128 {
+    const MAX: Self = u128::MAX;
+    const MIN: Self = u128::MIN;
+    const ONE: Self = 1;
     #[inline(always)]
     fn trailing_zeros(self) -> u32 {
         self.trailing_zeros()
@@ -158,7 +188,10 @@ impl BitScan for u128 {
     }
 }
 
-impl BitScan for usize {
+impl WordOps for usize {
+    const MAX: Self = usize::MAX;
+    const MIN: Self = usize::MIN;
+    const ONE: Self = 1;
     #[inline(always)]
     fn trailing_zeros(self) -> u32 {
         self.trailing_zeros()

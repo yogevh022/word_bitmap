@@ -18,13 +18,13 @@ impl<W: Word> BitMap<W> {
     #[inline(always)]
     pub fn set_bit_one(&mut self, bit_idx: usize) {
         debug_assert!(bit_idx < Self::WORD_BITS);
-        self.word |= W::from(1) << bit_idx;
+        self.word |= W::ONE << bit_idx;
     }
 
     #[inline(always)]
     pub fn set_bit_zero(&mut self, bit_idx: usize) {
         debug_assert!(bit_idx < Self::WORD_BITS);
-        self.word &= !(W::from(1) << bit_idx);
+        self.word &= !(W::ONE << bit_idx);
     }
 
     #[inline(always)]
@@ -45,6 +45,16 @@ impl<W: Word> BitMap<W> {
     #[inline(always)]
     pub fn first_one_msb(&self) -> u32 {
         self.word.leading_zeros()
+    }
+
+    #[inline(always)]
+    pub fn is_min(&self) -> bool {
+        self.word == W::MIN
+    }
+
+    #[inline(always)]
+    pub fn is_max(&self) -> bool {
+        self.word == W::MAX
     }
 }
 
