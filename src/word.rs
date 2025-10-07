@@ -53,7 +53,7 @@ impl<T> Word for T where
 
 pub trait WordOps {
     const MAX: Self;
-    const MIN: Self;
+    const ZERO: Self;
     const ONE: Self;
     fn trailing_zeros(self) -> u32;
     fn leading_zeros(self) -> u32;
@@ -63,7 +63,7 @@ pub trait WordOps {
 
 impl WordOps for u8 {
     const MAX: Self = u8::MAX;
-    const MIN: Self = u8::MIN;
+    const ZERO: Self = u8::MIN;
     const ONE: Self = 1;
     #[inline(always)]
     fn trailing_zeros(self) -> u32 {
@@ -88,7 +88,7 @@ impl WordOps for u8 {
 
 impl WordOps for u16 {
     const MAX: Self = u16::MAX;
-    const MIN: Self = u16::MIN;
+    const ZERO: Self = u16::MIN;
     const ONE: Self = 1;
     #[inline(always)]
     fn trailing_zeros(self) -> u32 {
@@ -113,7 +113,7 @@ impl WordOps for u16 {
 
 impl WordOps for u32 {
     const MAX: Self = u32::MAX;
-    const MIN: Self = u32::MIN;
+    const ZERO: Self = u32::MIN;
     const ONE: Self = 1;
     #[inline(always)]
     fn trailing_zeros(self) -> u32 {
@@ -138,7 +138,7 @@ impl WordOps for u32 {
 
 impl WordOps for u64 {
     const MAX: Self = u64::MAX;
-    const MIN: Self = u64::MIN;
+    const ZERO: Self = u64::MIN;
     const ONE: Self = 1;
     #[inline(always)]
     fn trailing_zeros(self) -> u32 {
@@ -163,7 +163,7 @@ impl WordOps for u64 {
 
 impl WordOps for u128 {
     const MAX: Self = u128::MAX;
-    const MIN: Self = u128::MIN;
+    const ZERO: Self = u128::MIN;
     const ONE: Self = 1;
     #[inline(always)]
     fn trailing_zeros(self) -> u32 {
@@ -188,7 +188,7 @@ impl WordOps for u128 {
 
 impl WordOps for usize {
     const MAX: Self = usize::MAX;
-    const MIN: Self = usize::MIN;
+    const ZERO: Self = usize::MIN;
     const ONE: Self = 1;
     #[inline(always)]
     fn trailing_zeros(self) -> u32 {

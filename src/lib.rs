@@ -48,8 +48,23 @@ impl<W: Word> BitMap<W> {
     }
 
     #[inline(always)]
+    pub fn bit_at(&self, bit_index: usize) -> W {
+        (self.word & (W::ONE << bit_index)) >> bit_index
+    }
+
+    #[inline(always)]
+    pub fn is_bit_one(&self, bit_index: usize) -> bool {
+        self.word & (W::ONE << bit_index) != W::ZERO
+    }
+
+    #[inline(always)]
+    pub fn is_bit_zero(&self, bit_index: usize) -> bool {
+        self.word & (W::ONE << bit_index) == W::ZERO
+    }
+
+    #[inline(always)]
     pub fn is_min(&self) -> bool {
-        self.word == W::MIN
+        self.word == W::ZERO
     }
 
     #[inline(always)]
